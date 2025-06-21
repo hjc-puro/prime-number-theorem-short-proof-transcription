@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem*{pntheorem}{Prime Number Theorem}
+\newtheorem*{analyticthm}{Analytic Theorem}
+\begin{document}
+\title{Newman's Short Proof of the Prime Number Theorem}
+\author{D. Zagier}
+\date{}
+\maketitle
+\begin{center}\textit{Dedicated to the Prime Number Theorem on the occasion of its 100th birthday}\end{center}
+
+The prime number theorem, that the number of primes $\le x$ is asymptotic to $x/\log x$, was proved (independently) by Hadamard and de~la~Vall\'ee Poussin in 1896. Their proof had two elements: showing that Riemann's zeta function $\zeta(s)$ has no zeros with $\Re(s)=1$, and deducing the prime number theorem from this. An ingenious short proof of the first assertion was found soon afterwards by the same authors and by Mertens and is reproduced here, but the deduction of the prime number theorem continued to involve difficult analysis. A proof that was \textit{elementary} in a technical sense---it avoided the use of complex analysis---was found in 1949 by Selberg and Erd\H{o}s, but this proof is very intricate and much less clearly motivated than the analytic one. A few years ago, however, D.~J.~Newman found a very simple version of the Tauberian argument needed for an analytic proof of the prime number theorem. We describe the resulting proof, which has a beautifully simple structure and uses hardly anything beyond Cauchy's theorem.
+
+Recall that the notation $f(x)\sim g(x)$ (``$f$ and $g$ are asymptotically equal'') means that $\displaystyle\lim_{x\to\infty}\frac{f(x)}{g(x)}=1$, and that $O(f)$ denotes a quantity bounded in absolute value by a fixed multiple of $f$. We denote by $\pi(x)$ the number of primes $\le x$.
+
+\begin{pntheorem}
+$\pi(x)\sim \frac{x}{\log x}$ as $x\to\infty$.
+\end{pntheorem}
+
+We present the argument in a series of steps. Specifically, we prove a sequence of properties of the three functions
+\begin{align*}
+\zeta(s)&=\sum_{n=1}^{\infty} n^{-s},\\
+\Phi(s)&=\sum_{p}\frac{\log p}{p^s},\\
+\Theta(x)&=\sum_{p\le x}\log p,
+\end{align*}
+where $s\in\mathbb{C}$ and $x\in\mathbb{R}$; we always use $p$ to denote a prime. The series defining $\zeta(s)$ (the Riemann zeta-function) and $\Phi(s)$ are easily seen to be absolutely and locally uniformly convergent for $\Re(s)>1$, so they define holomorphic functions in that domain.
+
+\renewcommand{\labelenumi}{(\Roman{enumi}).}
+\begin{enumerate}
+\item $\displaystyle \zeta(s)=\prod_{p}\frac{1}{1-p^{-s}}\quad \text{for }\Re(s)>1.$
+\begin{proof}
+From unique factorization and the absolute convergence of $\zeta(s)$ we have 
+\[
+\zeta(s)=\sum_{n=1}^\infty n^{-s} = \prod_{p}\Big(1 + p^{-s} + p^{-2s} + \cdots\Big) = \prod_{p}\frac{1}{\,1-p^{-s}\,},\qquad (\Re(s)>1).
+\] 
+\end{proof}
+
+\item $\displaystyle \zeta(s) - \frac{1}{s-1}$ extends holomorphically to $\Re(s)>0.$ 
+\begin{proof}
+For $\Re(s)>1$ we have 
+\[
+\zeta(s) - \frac{1}{s-1} = \sum_{n=1}^\infty n^{-s} - \int_{1}^{\infty}x^{-s}\,dx = \sum_{n=1}^{\infty}\Big(n^{-s} - \int_{n}^{\,n+1}x^{-s}\,dx\Big).
+\] 
+The series on the right converges absolutely for $\Re(s)>0$ by the mean value theorem (applied to the function $x^{-s}$ on each interval $[n,n+1]$). This provides an analytic continuation of $\zeta(s)-\frac{1}{s-1}$ to the half-plane $\Re(s)>0$.
+\end{proof}
+
+\item $\displaystyle \Theta(x)=O(x).$
+\begin{proof}
+For $n\in\mathbb{N}$ we have 
+\[
+\Theta(2n)-\Theta(n) = \log\frac{\prod_{p\le 2n}p}{\prod_{p\le n}p} = \log\binom{2n}{n} < \log(4^n) = n\log 4.
+\] 
+Hence $\Theta(2n)-\Theta(n) = O(n)$. Moreover, since $\Theta(x)$ changes by $O(\log x)$ if $x$ changes by $O(1)$ (because the only changes occur when $x$ passes a prime, at which point $\Theta(x)$ increases by $\log x$), we find $\Theta(x) - \Theta(x/2) < Cx$ for any fixed $C > \log 2$ and all sufficiently large $x$. Summing this inequality over the values $x,\,x/2,\,x/4,\dots, x/2^r$, where $x/2^r \ge x_0 > x/2^{r+1}$ (for some $x_0=x_0(C)$), and telescoping, we obtain $\Theta(x) < 2Cx + O(1)$. Thus $\Theta(x)=O(x)$.
+\end{proof}
+
+\item $\displaystyle \zeta(s)\neq0$ \textbf{for} $\Re(s)\ge 1$, \textbf{and} $\Phi(s) - \frac{1}{s-1}$ \textbf{is holomorphic for} $\Re(s)\ge 1.$ 
+\begin{proof}
+For $\Re(s)>1$, the convergent product in (I) implies $\zeta(s)\neq0$. Furthermore, differentiating the Euler product gives 
+\[
+-\frac{\zeta'(s)}{\zeta(s)} = \sum_{p}\sum_{k=1}^\infty \frac{\log p}{p^{ks}} = \Phi(s) + \sum_{k=2}^{\infty}\;\sum_{p}\frac{\log p}{p^{ks}} = \Phi(s) + \sum_{p}\frac{\log p}{p^{2s}(1-p^{-s})}\,. 
+\] 
+The final sum converges for $\Re(s)>\frac{1}{2}$. Hence, using (II), $\Phi(s)$ extends meromorphically to $\Re(s)>\frac{1}{2}$, with poles only at $s=1$ and at the zeros of $\zeta(s)$. Now, if $\zeta(s)$ had a zero of order $\mu$ at $s=1+it_0$ (with $t_0\neq 0$ real) and a zero of order $\nu$ at $s=1+2it_0$ (where $\mu,\nu\ge0$ by (II)), then one finds 
+\[
+\lim_{\epsilon\to 0}\epsilon^{\mu}\Phi(1+\epsilon) = 1,\qquad 
+\lim_{\epsilon\to 0}\epsilon^{\mu}\Phi(1+\epsilon-it_0) = -\,\mu,\qquad 
+\lim_{\epsilon\to 0}\epsilon^{\nu}\Phi(1+\epsilon+2it_0) = -\,\nu\,.
+\] 
+From these, an inequality relating $\Phi(1+\epsilon+it_0)$, $\Phi(1+\epsilon-it_0)$ and $\Phi(1+\epsilon+2it_0)$ can be obtained, leading to $6 - 8\mu - 2\nu \ge 0$. This forces $\mu=0$, i.e. $\zeta(1+it_0)\neq0$. Thus $\zeta(s)\neq0$ for $\Re(s)=1$, and moreover $\Phi(s)-\frac{1}{s-1}$ is holomorphic for $\Re(s)\ge 1$. 
+\end{proof}
+
+\item $\displaystyle \int_{1}^{\infty}\frac{\Theta(x)}{x^2}\,dx < \infty.$
+\begin{proof}
+Let $f(t)=\Theta(e^t)e^{-t}-1$ and $g(z)=\frac{\Phi(z+1)}{\,z+1\,}-\frac{1}{z}\,. $ By (III) and (IV), $f(t)$ is bounded and $g(z)$ extends holomorphically to $\Re(z)\ge 0$. Hence we may apply the Analytic Theorem (stated below) to conclude that $\int_{0}^{\infty}f(t)\,dt$ converges. But $\int_{0}^{\infty}f(t)\,dt = \int_{0}^{\infty}\Theta(e^t)e^{-t}\,dt - \int_{0}^{\infty}dt = \int_{1}^{\infty}\frac{\Theta(x)}{x^2}\,dx - \infty$. The cancellation of the divergent part shows that $\int_{1}^{\infty} \Theta(x)x^{-2}\,dx$ is convergent.
+\end{proof}
+
+\item $\displaystyle \Theta(x)\sim x.$ 
+\begin{proof}
+Assume to the contrary that there exists some $A>1$ such that $\Theta(x)\ge A\,x$ for arbitrarily large values of $x$. Since $\Theta(x)$ is non-decreasing, we have for any such $x$ 
+\[
+\int_{x/2}^{\,x}\frac{A x - t}{t^2}\,dt = A\ln 2 - \frac{\Theta(x)}{x}\,,
+\] 
+which is positive for sufficiently large $x$ (because $\Theta(x)/x \le 1$ eventually, by (III)). This contradicts the convergence in (V). Similarly, the assumption that $\Theta(x)\le A\,x$ for some $A<1$ and infinitely many $x$ leads to a contradiction. Therefore $\Theta(x)\sim x$. 
+\end{proof}
+\end{enumerate}
+
+The prime number theorem follows easily from (VI), since for any $\epsilon>0$
+\[
+\Theta(x) = \sum_{p\le x}\log p < \sum_{p\le x}\log x = \pi(x)\log x,
+\] 
+and 
+\[
+\Theta(x) \ge \sum_{(1-\epsilon)x < p \le x}\log p > (1-\epsilon)\log x\;\big[\pi(x) - \pi((1-\epsilon)x)\big]\,.
+\] 
+Using $\Theta(x)\sim x$ and the fact that $\pi((1-\epsilon)x) = \pi(x) + o(x)$ as $x\to\infty$, we deduce $(1-\epsilon)\pi(x)\log x < \Theta(x) < \pi(x)\log x$ for all sufficiently large $x$. Dividing through by $\log x$ and letting $x\to\infty$ (and then $\epsilon\to 0$) yields $\pi(x)\sim x/\log x$, completing the proof of the Prime Number Theorem.
+
+\begin{analyticthm}
+Let $f(t)$ $(t\ge 0)$ be a bounded and locally integrable function and suppose that the function 
+\[ 
+g(z) = \int_{0}^{\infty} f(t)e^{-zt}\,dt \qquad (\Re(z)>0)
+\] 
+extends holomorphically to $\Re(z)\ge 0$. Then $\int_{0}^{\infty} f(t)\,dt$ exists (and equals $g(0)$).
+\end{analyticthm}
+\begin{proof}[Proof of the Analytic Theorem.]
+For $T>0$ set $g_T(z) = \int_{0}^{T}f(t)e^{-zt}\,dt$. This is clearly an entire function of $z$. We must show that $\lim_{T\to\infty}g_T(0) = g(0)$. Let $R>0$ and let $C$ be the boundary of the region $\{z\in\mathbb{C}\,:\,|z|=R,\,\Re(z)\ge -\delta\}$, where $\delta>0$ is small enough (depending on $R$) that $g(z)$ is holomorphic in and on $C$. By Cauchy's theorem,
+\[
+g(0)-g_T(0) = \frac{1}{2\pi i}\int_{C} \frac{g(z)-g_T(z)}{z}\,dz\,.
+\] 
+On the semicircle $C^+ = C\cap\{\Re(z)>0\}$, we have $|(g(z)-g_T(z))e^{-zT}|\le 2B/R^2$, where $B = \sup_{t\ge 0}|f(t)|$, because 
+\[
+|g(z)-g_T(z)| = \Big|\int_{T}^{\infty}f(t)e^{-zt}\,dt\Big| \le \int_{T}^{\infty}|f(t)|e^{-\Re(z)t}\,dt \le \frac{B}{\Re(z)}e^{-\Re(z)T} \le \frac{B}{R}e^{-RT}\,,
+\] 
+and 
+\[
+|e^{zT}| = e^{\Re(z)T} \le e^{RT}\,. 
+\] 
+Hence the contribution to $g(0)-g_T(0)$ from the integral over $C^+$ is bounded by $B/R$. For the integral over the segment $C^- = C\cap\{\Re(z)=-\delta\}$, we consider $g(z)$ and $g_T(z)$ separately. Since $g_T$ is entire, we can replace the path of integration for $g_T$ by the line $\Re(z)=-\delta$ with $|z|$ growing without bound. The integral of $g_T(z)/z$ over this infinite line is then bounded by $2\pi B/R$. A similar bound holds for the integral of $g(z)/z$ over $C^-$. Therefore 
+\[
+|g(0)-g_T(0)| < \frac{2B}{R}\,. 
+\] 
+Since $R$ is arbitrary, we conclude that $\lim_{T\to\infty}g_T(0) = g(0)$, proving the theorem.
+\end{proof}
+
+\section*{Historical remarks.}
+The ``Riemann'' zeta function $\zeta(s)$ was first introduced and studied by Euler, and the product representation given in (I) is his. The connection with the prime number theorem was found by Riemann, who made a deep study of the analytic properties of $\zeta(s)$. However, for our purposes the nearly trivial analytic continuation property (II) is sufficient. The extremely ingenious argument in (III) is in essence due to Chebyshev, who used more refined versions of such arguments to prove that the ratio of $\Theta(x)$ to $x$ (and hence also of $\pi(x)$ to $x/\log x$) lies between $0.92$ and $1.11$ for $x$ sufficiently large. This remained the best result until the prime number theorem was proved in 1896 by de~la~Vall\'ee Poussin and Hadamard. Their proofs were long and intricate (a simplified modern presentation is given on pp.~41--47 of Titchmarsh's book on the Riemann zeta function~[T]). The very simple proof reproduced in (IV) of the non-vanishing of $\zeta(s)$ on the line $\Re(s)=1$ was given in essence by Hadamard (the proof of this fact in de~la~Vall\'ee Poussin's first paper had been about 25 pages long) and then refined by de~la~Vall\'ee Poussin and by Mertens, the version given by the former being particularly elegant. The Analytic Theorem and its use to prove the prime number theorem as explained in steps (V) and (VI) above are due to D.~J.~Newman. Apart from a few minor simplifications, the exposition here follows that in Newman's original paper [N] and in the expository paper [K] by J.~Korevaar. We refer the reader to P.~Bateman and H.~Diamond's survey article [B] for a beautiful historical perspective on the prime number theorem.
+
+\begin{thebibliography}{99}
+\bibitem[B]{B} P.~Bateman and H.~Diamond, \textit{A hundred years of prime numbers}, Amer. Math. Monthly \textbf{103} (1996), 729--741.
+\bibitem[K]{K} J.~Korevaar, \textit{On Newman's quick way to the prime number theorem}, Math. Intelligencer \textbf{4} (1982), 108--115.
+\bibitem[N]{N} D.~J.~Newman, \textit{Simple analytic proof of the prime number theorem}, Amer. Math. Monthly \textbf{87} (1980), 693--696.
+\bibitem[T]{T} E.~C.~Titchmarsh, \textit{The Theory of the Riemann Zeta Function}, Oxford, 1951.
+\end{thebibliography}
+
+\noindent Max-Planck-Institut f\"ur Mathematik\\
+Gottfried-Claren-Stra\ss e 26\\
+D-53225 Bonn, Germany\\
+\texttt{zagier@mpim-bonn.mpg.de}
+\end{document}
